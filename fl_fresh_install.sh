@@ -8,6 +8,22 @@ echo "Updating Your OS................."
 sleep 2;
 sudo apt-get update && sudo apt-get upgrade -y
 
+echo "lets install php 7.0 and modules"
+sleep 2;
+sudo apt install php7.0 php7.0-fpm -y
+sudo apt-get -y install php7.0-fpm php7.0-curl php7.0-gd php7.0-imap php7.0-mcrypt php7.0-readline php7.0-common php7.0-recode php7.0-mysql php7.0-cli php7.0-curl php7.0-mbstring php7.0-bcmath php7.0-mysql php7.0-opcache php7.0-zip php7.0-xml php-memcached php-imagick php-memcache memcached graphviz php-pear php-xdebug php-msgpack  php7.0-soap
+
+echo "Some php.ini tweaks"
+sleep 2;
+sudo sed -i "s/post_max_size = .*/post_max_size = 2000M/" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s/memory_limit = .*/memory_limit = 3000M/" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s/upload_max_filesize = .*/upload_max_filesize = 1000M/" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s/max_execution_time = .*/max_execution_time = 18000/" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s/; max_input_vars = .*/max_input_vars = 5000/" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s/zlib.output_compression = Off/zlib.output_compression = on/" /etc/php/7.0/fpm/php.ini
+
+sudo systemctl restart php7.0-fpm.service
+
 echo "Installing Nginx"
 sleep 2;
 sudo apt-get install nginx zip unzip pwgen composer -y
@@ -29,22 +45,6 @@ wget -O nginx.conf https://goo.gl/n8crcR
 composer create-project flarum/flarum /var/www/flarum --stability=beta
 sudo chown www-data:www-data -R /var/www/flarum
 sudo systemctl restart nginx.service
-
-echo "lets install php 7.0 and modules"
-sleep 2;
-sudo apt install php7.0 php7.0-fpm -y
-sudo apt-get -y install php7.0-fpm php7.0-curl php7.0-gd php7.0-imap php7.0-mcrypt php7.0-readline php7.0-common php7.0-recode php7.0-mysql php7.0-cli php7.0-curl php7.0-mbstring php7.0-bcmath php7.0-mysql php7.0-opcache php7.0-zip php7.0-xml php-memcached php-imagick php-memcache memcached graphviz php-pear php-xdebug php-msgpack  php7.0-soap
-
-echo "Some php.ini tweaks"
-sleep 2;
-sudo sed -i "s/post_max_size = .*/post_max_size = 2000M/" /etc/php/7.0/fpm/php.ini
-sudo sed -i "s/memory_limit = .*/memory_limit = 3000M/" /etc/php/7.0/fpm/php.ini
-sudo sed -i "s/upload_max_filesize = .*/upload_max_filesize = 1000M/" /etc/php/7.0/fpm/php.ini
-sudo sed -i "s/max_execution_time = .*/max_execution_time = 18000/" /etc/php/7.0/fpm/php.ini
-sudo sed -i "s/; max_input_vars = .*/max_input_vars = 5000/" /etc/php/7.0/fpm/php.ini
-sudo sed -i "s/zlib.output_compression = Off/zlib.output_compression = on/" /etc/php/7.0/fpm/php.ini
-
-sudo systemctl restart php7.0-fpm.service
 
 echo "Instaling MariaDB"
 sleep 2;
