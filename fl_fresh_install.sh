@@ -6,7 +6,7 @@ echo "Username (eg. nextcloud)?"
 read USERNAME
 echo "Updating OS................."
 sleep 2;
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update && sudo apt-get upgrade -y
 
 echo "Installing Nginx"
 sleep 2;
