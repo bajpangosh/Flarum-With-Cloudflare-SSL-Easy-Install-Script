@@ -4,7 +4,7 @@ echo "Domain Name (eg. example.com)?"
 read DOMAIN
 echo "Username (eg. flarum)?"
 read USERNAME
-echo "Updating OS................."
+echo "Updating Your OS................."
 sleep 2;
 sudo apt-get update && sudo apt-get upgrade -y
 
@@ -26,9 +26,8 @@ sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 cd /etc/nginx/
 sudo mv nginx.conf nginx.conf.backup
 wget -O nginx.conf https://goo.gl/n8crcR
-sudo mkdir /var/www/"$DOMAIN"
-composer create-project flarum/flarum /var/www/"$DOMAIN" --stability=beta
-sudo chown www-data:www-data -R /var/www/"$DOMAIN"
+composer create-project flarum/flarum /var/www/flarum --stability=beta
+sudo chown www-data:www-data -R /var/www/flarum
 sudo systemctl restart nginx.service
 
 echo "lets install php 7.0 and modules"
