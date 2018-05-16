@@ -10,7 +10,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 echo "Install Dependancies"
 sleep 2;
-sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip
+sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip -y
 
 cd /etc/nginx/sites-available/
 wget -O "$DOMAIN" https://goo.gl/uV3Vz2
