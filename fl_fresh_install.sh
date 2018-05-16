@@ -33,11 +33,11 @@ composer create-project flarum/flarum /var/www/flarum --stability=beta
 sudo chown www-data:www-data -R /var/www/flarum
 sudo systemctl restart nginx.service
 
-echo "Generating a Strong MySQL Database"
-sleep 2;
+echo "Enter Your MySQL root Password"
+sleep 1;
 PASS=`pwgen -s 14 1`
 
-mysql -uroot <<MYSQL_SCRIPT
+mysql -u root -p <<MYSQL_SCRIPT
 CREATE DATABASE $USERNAME;
 CREATE USER '$USERNAME'@'localhost' IDENTIFIED BY '$PASS';
 GRANT ALL PRIVILEGES ON $USERNAME.* TO '$USERNAME'@'localhost';
