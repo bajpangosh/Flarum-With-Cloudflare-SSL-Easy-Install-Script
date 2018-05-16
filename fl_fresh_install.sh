@@ -25,6 +25,10 @@ sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 cd /etc/nginx/
 sudo mv nginx.conf nginx.conf.backup
 wget -O nginx.conf https://goo.gl/n8crcR
+
+echo "Download & Installing Flarum"
+sleep 2;
+
 composer create-project flarum/flarum /var/www/flarum --stability=beta
 sudo chown www-data:www-data -R /var/www/flarum
 sudo systemctl restart nginx.service
